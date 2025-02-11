@@ -4,87 +4,86 @@
 function ctrl_c(){
 
 clear; tput civis
-         echo -e "\n\n\e[31m|--------------------------|"
-                   echo -e "|     [!] Saliendo...      |"
-                   echo -e "|--------------------------|\e[0m\n\n"
-
-tput cnorm; exit 1
+rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+echo -e "\n\n\t\e[31m[!]\e[33m Saliendo... \n\n"
+sleep 1; tput cnorm;pkill mpv; exit 1
 
 }
 
-# Ctrl+C
+# CTRL+C
+
 trap ctrl_c SIGINT
 
-######################################################################################
 
-# Función para verificar e instalar comandos
+# Verifición e instalación automática de dependencias.
+function dep(){
+	tput civis; clear
+	echo -e "\n\n\t\e[35m[!]\e[33m Verificando si las dependencias están instaladas..."; sleep 1.3
+	clear
 
-check_and_install() {
-    command_name=$1
-    install_command=$2
+for requirements in fzf mpv wget curl pup python3; do
 
-if ! command -v $command_name &>/dev/null
+if ! $(which $requirements &>/dev/null)
 then
+clear
+echo -e "\n\n\t\e[31m[!]\e[33m Comando \e[31m$requirements\e[33m no instalado.\e[0m"
+sleep 2
 
-echo "$command_name no está instalado. Instalando..."
+	if [ $requirements == "pup" ]; then
+	pip3 install python3-pipx || pip3 install pipx --break-system-packages; clear; pipx install pup
+	fi
 
-eval $install_command
-else
+tput cnorm; sudo apt install $requirements -y
 
-: &>/dev/null
+	else
+	:
 
 fi
+done
+
+tput civis; clear
+echo -e "\n\n\t\e[32m[!]\e[33m Dependencias instaladas.\e[0m"
+sleep 1.3; tput cnorm; menu
+
 }
 
-# Verificar e instalar fzf
-check_and_install "fzf" "sudo apt install fzf -y"
+# Menú Principal
+function menu(){
+clear; tput cnorm
 
-# Verificar e instalar bsdtar
-check_and_install "bsdtar" "sudo apt install bsdtar -y" &>/dev/null
+	echo -e "\n\n\t\e[35m[-------------------------]"
+	echo -e "\t[ - ANICLI - En Español - ]"
+	echo -e "\t[-------------------------]\e[34m"
+	read -p "	[---Buscador--> " anime
+	sleep 0.3; clear
 
-# Verificar e instalar pup
-check_and_install "pup" "wget -qO- https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_0.4.0_linux_amd64.zip | bsdtar -xvf- -C /usr/local/bin && chmod +x /usr/local/bin/pup"
+anime2=$(echo "$anime" | tr ' ' '_')
 
-# Verificar e instalar awk (aunque awk generalmente está preinstalado en la mayoría de los sistemas)
-check_and_install "awk" "sudo apt install gawk -y" # gawk es una versión de awk
-sleep 1; clear
-
-# Buscar anime
-rm -rf /tmp/jkanime/ /tmp/cap.txt  /tmp/page.txt  /tmp/tmp.txt /tmp/url.txt
-clear; tput civis
-echo -e "\n\e[34m -------------------------- "
-echo -e "| \e[33m-\e[34m Bienvenido a \e[31mAni-cli\e[33m -\e[34m |"
-echo -e " -------------------------- "
-echo -e "| \e[33m-\e[31m En Español\e[33m -\e[34m |          "
-echo -e " ----------------           "
-sleep 0.3; tput cnorm
-read -p "| -Buscador-> " anime
-sleep 0.3; clear
-
-anime_name_formatted=$(echo "$anime" | tr ' ' '_')
-
-LINKS=$(curl -s https://jkanime.bz/buscar/$anime_name_formatted/ | pup 'a[href]' | grep -P '(?<=<a href=")[^"]*(?=")' | grep -vE "directorio|horario|top|hentai|facebook|youtube|usuario|guardado|solicitudes|listas|busquedas|tipoint|letrasint|tipo|genero|scrollToTopButton|#|index|discord|buscar" | sed 's|<a href="/">| |' | tr -d '><"= ' | sed 's/ahref/ /' | tr -d ' ' | sort -u)
-
+LINKS=$(curl -s https://jkanime.bz/buscar/$anime2/ | pup 'a[href]' | grep -P '(?<=<a href=")[^"]*(?=")' | grep -vE "directorio|horario|top|hentai|facebook|youtube|usuario|guardado|solicitudes|listas|busquedas|tipoint|letrasint|tipo|genero|scrollToTopButton|#|index|discord|buscar" | sed 's|<a href="/">| |' | tr -d '><"= ' | sed 's/ahref/ /' | tr -d ' ' | sort -u)
 
 # Uso de fzf para que el usuario eliga un anime
 selected_link=$(echo "$LINKS" | fzf --prompt="Selecciona un enlace: ")
 if [[ -n "$selected_link" ]]; then
 
     echo "$selected_link" | tr -d ' ' > /tmp/page.txt
-rep_cap
 
 else
 clear; tput civis
-echo -e "\n\t\e[31m[!] Opción no válida, inténtalo de nuevo... [!]\e[0m"
+echo -e "\n\n\t\e[31m[!]\e[33m Opción no válida, inténtalo de nuevo.\e[0m"; tput cnorm
 fi
+rep_cap
+}
 
-# Reproducir el capítulo
+# Función para reproducir el capítulo
+
+function rep_cap(){
 clear; tput civis
-echo -e " --------------------------- "
-echo -e "|        - Ani-cli -        |"
-echo -e " --------------------------- "
+echo -e "\n\n\t\e[35m[-------------------------]"
+echo -e "\t[ - ANICLI - En Español - ]"
+echo -e "\t[-------------------------]\e[34m"
+
  sleep 0.3; tput cnorm
- read -p "| -Nº de Capítulo-> " cap
+ read -p "	[- Nº de Capítulo-> " cap
  clear
         echo "$cap/" > /tmp/cap.txt
         echo $(cat /tmp/page.txt) > /tmp/url.txt
@@ -93,8 +92,30 @@ echo -e " --------------------------- "
         echo $(cat /tmp/url.txt) > /tmp/tmp.txt
         url=$(cat /tmp/tmp.txt | sed 's/ //')
 
-wget -p "$url" -P /tmp/ &>/dev/null
+wget -p "$url" -P /tmp/ 2>/dev/null
 
-url="$(grep url /tmp/jkanime.bz/um* | cut -d"'" -f2 | head -n 1)"
+ruta="/tmp/jkanime.bz/jk.php*"
 
-rm -rf /tmp/jkanime/ /tmp/cap.txt  /tmp/page.txt  /tmp/tmp.txt /tmp/url.txt; mpv --referrer="https://jkanime.bz" $url 2>/dev/null
+if cat $ruta &>/dev/null; then
+
+clear
+url2="$(cat /tmp/jkanime.bz/jk.php* | grep "https" | tail -n1 | sed 's/url://' | tr -d "', ")"
+:
+
+else
+
+tput civis;clear
+echo -e "\n\n\t\e[31m[!]\e[33m El video contiene anuncios, por lo tanto no está disponible desde terminal."; sleep 0.4
+echo -e "\t\e[31m[!]\e[33m Prueba con otro video."; sleep 2
+tput cnorm; menu
+
+fi
+
+rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+mpv --referrer="https://jkanime.bz" $url2 2>/dev/null
+
+}
+
+rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+dep
+

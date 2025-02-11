@@ -1,7 +1,7 @@
 # AniCli
-Script hecho en bash que nos permite ver anime subtitulado en español desde la terminal de manera gratuita y sin límites.
+Script sencillo hecho en bash que nos permite ver anime y peliculas de anime, todo subtitulado al español, en streaming, sin anuncios y desde la terminal.
 
-También puedes ver peliculas. ( Cuando te pida seleccionar un capítulo, pon ```1``` )
+#### Para ver peliculas. ( Cuando te pida seleccionar un capítulo, pon ```1``` )
 
 
 

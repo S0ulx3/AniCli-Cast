@@ -4,7 +4,7 @@
 function ctrl_c(){
 
 clear; tput civis
-rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+rm -rf /tmp/jkanime.bz &>/dev/null
 echo -e "\n\n\t\e[31m[!]\e[33m Saliendo... \n\n"
 sleep 1; tput cnorm;pkill mpv; exit 1
 
@@ -65,13 +65,15 @@ LINKS=$(curl -s https://jkanime.bz/buscar/$anime2/ | pup 'a[href]' | grep -P '(?
 selected_link=$(echo "$LINKS" | fzf --prompt="Selecciona un enlace: ")
 if [[ -n "$selected_link" ]]; then
 
-    echo "$selected_link" | tr -d ' ' > /tmp/page.txt
+selection=$(echo "$selected_link" | tr -d ' ')
 
 else
 clear; tput civis
 echo -e "\n\n\t\e[31m[!]\e[33m Opción no válida, inténtalo de nuevo.\e[0m"; tput cnorm
 fi
+
 rep_cap
+
 }
 
 # Función para reproducir el capítulo
@@ -85,14 +87,12 @@ echo -e "\t[-------------------------]\e[34m"
  sleep 0.3; tput cnorm
  read -p "	[- Nº de Capítulo-> " cap
  clear
-        echo "$cap/" > /tmp/cap.txt
-        echo $(cat /tmp/page.txt) > /tmp/url.txt
-        capp=$(cat /tmp/cap.txt | sed 's/ //')
-        echo $(cat /tmp/cap.txt) >> /tmp/url.txt
-        echo $(cat /tmp/url.txt) > /tmp/tmp.txt
-        url=$(cat /tmp/tmp.txt | sed 's/ //')
 
-wget -p "$url" -P /tmp/ 2>/dev/null
+	CAP=$(echo "$cap/" | sed 's/ //')
+
+	URL=$(echo "$selection$CAP")
+
+wget -p "$URL" -P /tmp/ 2>/dev/null
 
 ruta="/tmp/jkanime.bz/jk.php*"
 
@@ -111,11 +111,9 @@ tput cnorm; menu
 
 fi
 
-rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+rm -rf /tmp/jkanime.bz &>/dev/null
 mpv --referrer="https://jkanime.bz" $url2 2>/dev/null
-
 }
 
-rm -rf /tmp/jkanime.bz/* &>/dev/null; rm /tmp/cap.txt /tmp/page.txt /tmp/tmp.txt /tmp/url.txt &>/dev/null
+rm -rf /tmp/jkanime.bz &>/dev/null
 dep
-

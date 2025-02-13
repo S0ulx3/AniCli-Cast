@@ -1,6 +1,6 @@
 # AniCli
-> Script sencillo hecho en bash que nos permite ver anime y peliculas de anime, todo subtitulado al español, en streaming, sin anuncios y desde la terminal.
-> ## El contenido se encuentra en la página https://jkanime.bz
+> ## Script sencillo hecho en bash que nos permite ver anime y peliculas de anime, todo subtitulado al español, en streaming, sin anuncios y desde la terminal.
+> ### El contenido se encuentra en la página https://jkanime.bz
 ---------------
 > # Para ver peliculas.
 > ## ( Cuando te pida seleccionar un capítulo, pon ```1``` )

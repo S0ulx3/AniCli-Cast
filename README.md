@@ -6,6 +6,7 @@
 > ## ( Cuando te pida seleccionar un capítulo, pon ```1``` )
 ----------------------
 # Vídeo de la herramienta.
+![AniCliGIF](https://github.com/user-attachments/assets/5e526d77-324a-401f-87a0-e90a0238647f)
 > https://youtu.be/sY99mLlkDOw?si=O9MnXt26zI7RLMIw
 ----------------------
 # Requisitos

@@ -11,8 +11,7 @@
 ----------------------
 # Requisitos
 > Se instalan automáticamente
-
-fzf  mpv  wget  pup  curl  python3
+> fzf  mpv  wget  pup  curl  python3
 ----------------------
 # Instalación
 > ``` git clone https://github.com/S0ulx3/AniCli-Cast ```

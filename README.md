@@ -11,6 +11,7 @@
 ----------------------
 # Requisitos
 > Se instalan automáticamente
+
 > fzf  mpv  wget  pup  curl  python3
 ----------------------
 # Instalación

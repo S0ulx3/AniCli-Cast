@@ -9,6 +9,7 @@
 | --------------- |
 |[![AniCli-Cast V2 - Video](https://img.youtube.com/vi/tw1isZXJdpg/0.jpg)](https://www.youtube.com/watch?v=tw1isZXJdpg)
 
+> Haz click en la imagen para ir al video de Youtube.
 ---
 
 ## 📝 Descripción 

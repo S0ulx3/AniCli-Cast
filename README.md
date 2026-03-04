@@ -1,19 +1,21 @@
 # 📺 AniCli-Cast V2
 
-[**Ver Tutorial en YouTube**](#-presentación-y-tutorial-oficial) | [**Instalación Rápida**](#-instalación-y-uso) | [**Biblioteca**](#-características-principales)
+[**Video Tutorial**](#-video-tutorial) | [**Galería**](#-galería) | [**Descripción**](#-descripción) | [**Instalacíon rápida**](#-instalación-y-uso) | [**Más Información**](#ℹ%EF%B8%8F-más-información)
 
 ---
 
-## 📺 Presentación y Tutorial Oficial
-[![AniCli-Cast V2](https://img.youtube.com/vi/tw1isZXJdpg/0.jpg)](https://www.youtube.com/watch?v=tw1isZXJdpg)
-
-*Haz clic en la imagen para ver las nuevas funciones en acción (V2).*
+## 📹 Video Tutorial
+|  Video Tutorial | 
+| --------------- |
+|[![AniCli-Cast V2 - Video](https://img.youtube.com/vi/tw1isZXJdpg/0.jpg)](https://www.youtube.com/watch?v=tw1isZXJdpg)
 
 ---
 
-# 📝 Descripción 
-Un potente gestor y reproductor de Anime para tu terminal.
-AniCli-Cast es un script de Bash diseñado para buscar, extraer y reproducir contenido de Jkanime directamente en tu terminal. Olvídate de la publicidad intrusiva y gestiona tu propia biblioteca local de enlaces de forma eficiente.
+## 📝 Descripción 
+> Un potente gestor y reproductor de Anime para tu terminal.
+> AniCli-Cast es un script de Bash diseñado para buscar, extraer y reproducir contenido de Jkanime directamente en tu terminal.
+> Olvídate de la publicidad intrusiva y gestiona tu propia biblioteca local de enlaces de forma eficiente.
+
 ✨ Características Principales
  * 🔍 Buscador Inteligente: Encuentra cualquier serie o película disponible mediante integración con fzf.
  * 📂 Biblioteca Local: Guarda los enlaces extraídos para verlos más tarde sin necesidad de volver a buscar.
@@ -23,7 +25,7 @@ AniCli-Cast es un script de Bash diseñado para buscar, extraer y reproducir con
  * ⚡ Automatización de Capítulos: Permite extraer rangos completos de episodios (ej: del 1 al 12) de una sola vez.
 
 
-# 🚀 Instalación y Uso
+## 🚀 Instalación y Uso
 1. Clonar el repositorio
 ```
 git clone https://github.com/S0ulx3/AniCli-Cast
@@ -45,9 +47,14 @@ chmod +x AniCli.sh
 
 ---
 
-# ⭐ Características principales
+## 📸 Galería
+| Reproduccion en MPV |
+| :---: |
+| ![Reproduccion en MPV](https://github.com/S0ulx3/AniCli-Cast/blob/main/AniCli-In_use.jpg)
 
 ---
+
+## ℹ️ Más Información
 
 # 🛠️ Dependencias Necesarias
 Para un funcionamiento óptimo, el script utiliza:

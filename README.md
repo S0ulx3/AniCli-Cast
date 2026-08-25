@@ -1,6 +1,6 @@
 # 📺 AniCli-Cast V2
 
-[**Video Tutorial**](#-video-tutorial) | [**Galería**](#-galería) | [**Descripción**](#-descripción) | [**Instalacíon rápida**](#-instalación-y-uso) | [**Más Información**](#ℹ%EF%B8%8F-más-información)
+[**Video Tutorial**](#-video-tutorial) | [**Galería**](#-galería) | [**Descripción**](#-descripción) | [**Instalacíon rápida**](#-instalación-y-uso) | [**Más Información**](#ℹ%EF%B8%8F-más-información) | [**Errores y soluciones**](#%EF%B8%8F-soluciones)
 
 ---
 
@@ -51,7 +51,20 @@ chmod +x AniCli.sh
 ## 📸 Galería
 | Reproduccion en MPV |
 | :---: |
-| ![Reproduccion en MPV](https://github.com/S0ulx3/AniCli-Cast/blob/main/AniCli-In_use.jpg)
+| [![Reproduccion en MPV](https://github.com/S0ulx3/AniCli-Cast/raw/main/AniCli-In_use.jpg)](https://github.com/S0ulx3/AniCli-Cast/blob/main/AniCli-In_use.jpg) |
+
+---
+## ⚠️ Soluciones
+
+# Problema al reproducir contenido con mpv
+
+* Si estás teniendo problemas prueba a modificar la linea 157 por esto
+
+```
+mpv --vo=x11 $start_pos --ontop --term-status-msg='POS=${=time-pos}' "$LINK" > "$log_file" 2>/dev/null
+```
+
+# + Podéis contribuir enviando errores...
 
 ---
 
